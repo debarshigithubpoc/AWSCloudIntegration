@@ -5,9 +5,9 @@ route_tables = {
     gateway_name = "my-igw"
     routes = [
       {
-        cidr_block    = "0.0.0.0/0"
-        gateway_type  = "internet"
-        gateway_id    = null
+        cidr_block   = "0.0.0.0/0"
+        gateway_type = "internet"
+        gateway_id   = null
       }
     ]
     tags = {
@@ -20,9 +20,9 @@ route_tables = {
     gateway_name = "my-nat"
     routes = [
       {
-        cidr_block    = "0.0.0.0/0"
-        gateway_type  = "nat"
-        gateway_id    = null
+        cidr_block   = "0.0.0.0/0"
+        gateway_type = "nat"
+        gateway_id   = null
       }
     ]
     tags = {
