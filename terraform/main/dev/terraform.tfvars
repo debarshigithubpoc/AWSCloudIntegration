@@ -87,6 +87,98 @@ nat_gateways = {
 
 ## Route Tables , routes and Route table assocation for AWS EKS Cluster
 
+route_tables = {
+  private_rt_1 = {
+    vpc_name     = "eks-dev-vpc-001"            # VPC name tag to lookup
+    gateway_name = "eks-dev-vpc001-natgway-001" # NAT gateway name tag to lookup
+    routes = [
+      {
+        cidr_block   = "0.0.0.0/0"
+        gateway_type = "nat" # Uses NAT gateway for internet access
+      },
+      {
+        cidr_block = "10.0.0.0/16"
+        gateway_id = "local" # Local route for VPC CIDR
+      }
+    ]
+    tags = {
+      Name = "eks-dev-vpc001-prvtrt-001"
+    }
+  }
+
+  public_rt_1 = {
+    vpc_name     = "eks-dev-vpc-001"
+    gateway_name = "eks-dev-vpc001-igw-001"
+    routes = [
+      {
+        cidr_block   = "0.0.0.0/0"
+        gateway_type = "internet" # Uses Internet Gateway
+      },
+      {
+        cidr_block = "10.0.0.0/16"
+        gateway_id = "local" # Local route for VPC CIDR
+      }
+    ]
+    tags = {
+      Name = "eks-dev-vpc001-pubtrt-001"
+    }
+  }
+
+  private_rt_2 = {
+    vpc_name     = "eks-dev-vpc-001"            # VPC name tag to lookup
+    gateway_name = "eks-dev-vpc001-natgway-001" # NAT gateway name tag to lookup
+    routes = [
+      {
+        cidr_block   = "0.0.0.0/0"
+        gateway_type = "nat" # Uses NAT gateway for internet access
+      },
+      {
+        cidr_block = "10.0.0.0/16"
+        gateway_id = "local" # Local route for VPC CIDR
+      }
+    ]
+    tags = {
+      Name = "eks-dev-vpc001-prvtrt-002"
+    }
+  }
+
+  private_rt_3 = {
+    vpc_name     = "eks-dev-vpc-001"            # VPC name tag to lookup
+    gateway_name = "eks-dev-vpc001-natgway-001" # NAT gateway name tag to lookup
+    routes = [
+      {
+        cidr_block   = "0.0.0.0/0"
+        gateway_type = "nat" # Uses NAT gateway for internet access
+      },
+      {
+        cidr_block = "10.0.0.0/16"
+        gateway_id = "local" # Local route for VPC CIDR
+      }
+    ]
+    tags = {
+      Name = "eks-dev-vpc001-prvtrt-003"
+    }
+  }
+
+  private_rt_4 = {
+    vpc_name     = "eks-dev-vpc-001"            # VPC name tag to lookup
+    gateway_name = "eks-dev-vpc001-natgway-001" # NAT gateway name tag to lookup
+    routes = [
+      {
+        cidr_block   = "0.0.0.0/0"
+        gateway_type = "nat" # Uses NAT gateway for internet access
+      },
+      {
+        cidr_block = "10.0.0.0/16"
+        gateway_id = "local" # Local route for VPC CIDR
+      }
+    ]
+    tags = {
+      Name = "eks-dev-vpc001-prvtrt-004"
+    }
+  }
+}
+
 # route_tables = {
 #   rt1 = {
 #     vpc_name     = "my-vpc"

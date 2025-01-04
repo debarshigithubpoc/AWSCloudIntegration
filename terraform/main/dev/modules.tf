@@ -11,7 +11,6 @@ module "internet_gateways" {
   depends_on        = [module.vpcs]
 }
 
-
 module "nat_gateways" {
   source       = "../../modules/nat_gateway"
   nat_gateways = try(var.nat_gateways, {})
@@ -19,10 +18,10 @@ module "nat_gateways" {
 }
 
 module "route_tables" {
-  source                   = "../../modules/route_table"
-  route_tables             = try(var.route_tables, {})
-  route_tables_association = try(var.route_tables_association, {})
-  depends_on               = [module.vpcs, module.nat_gateways]
+  source       = "../../modules/route_table"
+  route_tables = try(var.route_tables, {})
+  # route_tables_association = try(var.route_tables_association, {})
+  depends_on = [module.vpcs, module.nat_gateways]
 }
 
 
