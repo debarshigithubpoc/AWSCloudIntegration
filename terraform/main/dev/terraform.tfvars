@@ -61,6 +61,29 @@ vpcs = {
 
 }
 
+## Internet Gateway
+
+internet_gateways = {
+  igw1 = {
+    vpc_name = "eks-dev-vpc-001"
+    tags = {
+      Name = "eks-dev-vpc001-igw-001"
+    }
+  }
+}
+
+
+## Nat Gateway
+
+nat_gateways = {
+  ngw1 = {
+    subnet_name = "eks-dev-vpc-001-web-pub-subnet-001"
+    tags = {
+      Name = "eks-dev-vpc001-natgway-001"
+    }
+  }
+}
+
 
 ## Route Tables , routes and Route table assocation for AWS EKS Cluster
 

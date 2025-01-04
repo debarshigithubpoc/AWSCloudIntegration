@@ -9,3 +9,11 @@ variable "route_tables" {
 variable "route_tables_association" {
   default = {}
 }
+
+variable "nat_gateways" {
+  default = {}
+}
+
+variable "internet_gateways" {
+  default = {}
+}
