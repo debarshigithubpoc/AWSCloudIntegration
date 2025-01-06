@@ -49,3 +49,8 @@ module "ecr_registry" {
   depends_on       = [module.iam_role, module.kms_key]
 }
 
+
+module "eks_cluster" {
+  source       = "../../modules/eks_cluster"
+  eks_clusters = try(var.eks_clusters, {})
+}

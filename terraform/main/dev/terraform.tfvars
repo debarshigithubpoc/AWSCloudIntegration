@@ -398,50 +398,32 @@ nacls = {
 
 }
 
-# route_tables = {
-#   rt1 = {
-#     vpc_name     = "my-vpc"
-#     gateway_type = "internet"
-#     gateway_name = "my-igw"
-#     routes = [
-#       {
-#         cidr_block   = "0.0.0.0/0"
-#         gateway_type = "internet"
-#         gateway_id   = null
-#       }
-#     ]
-#     tags = {
-#       Environment = "prod"
-#     }
-#   }
+eks_clusters = {
 
-#   rt2 = {
-#     vpc_name     = "my-vpc-2"
-#     gateway_type = "nat"
-#     gateway_name = "my-nat"
-#     routes = [
-#       {
-#         cidr_block   = "0.0.0.0/0"
-#         gateway_type = "nat"
-#         gateway_id   = null
-#       }
-#     ]
-#     tags = {
-#       Environment = "dev"
-#     }
-#   }
-# }
+  eks-dev-cluster = {
+    name      = "eks-dev-cluster"
+    role_name = "eks-dev-cluster-role"
+    vpc_name  = "eks-dev-vpc-001"
+    vpc_config = {
+      endpoint_private_access = true
+      endpoint_public_access  = false
+    }
+    subnets = {
 
-# route_tables_association = {
+      subnet1 = {
+        subnet_name = "eks-dev-vpc-001-app-prv-subnet-001"
+      }
+      subnet2 = {
+        subnet_name = "eks-dev-vpc-001-app-prv-subnet-003"
+      }
 
-#   assoc1 = {
-#     subnet_name     = "subnet-1"
-#     route_table_key = "rt1"
-#   }
-
-#   assoc2 = {
-#     subnet_name     = "subnet-2"
-#     route_table_key = "rt2"
-#   }
-
-# }
+    }
+    kms_key_alias = "arn:aws:kms:ap-south-1:140023400461:alias/eks-dev-cluster-key"
+    tags = {
+      Name = "eks-dev-cluster"
+    }
+    sg_tags = {
+      Name = "eks-dev-cluster-sg"
+    }
+  }
+}

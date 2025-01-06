@@ -37,3 +37,7 @@ variable "ecr_repositories" {
 variable "nacls" {
   default = {}
 }
+
+variable "eks_clusters" {
+  default = {}
+}
