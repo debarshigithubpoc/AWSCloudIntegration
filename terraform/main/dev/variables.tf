@@ -17,3 +17,23 @@ variable "nat_gateways" {
 variable "internet_gateways" {
   default = {}
 }
+
+variable "iam_roles" {
+  default = {}
+}
+
+variable "kms_keys" {
+  default = {}
+}
+
+variable "ecr_policys" {
+  default = {}
+}
+
+variable "ecr_repositories" {
+  default = {}
+}
+
+variable "nacls" {
+  default = {}
+}
