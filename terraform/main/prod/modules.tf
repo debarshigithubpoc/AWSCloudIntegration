@@ -5,6 +5,12 @@ module "vpcs" {
   vpc_subnet = try(each.value.vpc_subnet, null)
 }
 
+module "network_acls" {
+  source     = "../../modules/network_acls"
+  nacls      = try(var.nacls, {})
+  depends_on = [module.vpcs]
+}
+
 module "internet_gateways" {
   source            = "../../modules/internet_gateway"
   internet_gateways = try(var.internet_gateways, {})
@@ -24,4 +30,34 @@ module "route_tables" {
   depends_on = [module.vpcs, module.nat_gateways]
 }
 
+module "route_associations" {
+  source             = "../../modules/route_table_association"
+  route_associations = try(var.route_associations, {})
+  depends_on         = [module.route_tables]
+}
+
+module "iam_role" {
+  source                         = "../../modules/iam_role"
+  for_each                       = try(var.iam_roles, {})
+  aws_iam_role                   = try(each.value.aws_iam_role, {})
+  aws_iam_role_policy_attachment = try(each.value.aws_iam_role_policy_attachment, {})
+}
+
+module "kms_key" {
+  source   = "../../modules/kms_key"
+  kms_keys = try(var.kms_keys, {})
+}
+
+module "ecr_registry" {
+  source           = "../../modules/ecr_registry"
+  ecr_policys      = try(var.ecr_policys, {})
+  ecr_repositories = try(var.ecr_repositories, {})
+  depends_on       = [module.iam_role, module.kms_key]
+}
+
+
+module "eks_cluster" {
+  source       = "../../modules/eks_cluster"
+  eks_clusters = try(var.eks_clusters, {})
+}
 

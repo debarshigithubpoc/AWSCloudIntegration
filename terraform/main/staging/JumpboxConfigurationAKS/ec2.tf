@@ -5,13 +5,13 @@ resource "tls_private_key" "web_server" {
 }
 
 resource "aws_key_pair" "web_server_key" {
-  key_name   = "web-server-dev-key"
+  key_name   = "web-server-stg-key"
   public_key = tls_private_key.web_server.public_key_openssh
 }
 
 # Store private key in Secrets Manager
 resource "aws_secretsmanager_secret" "web_server_key" {
-  name = "web-server-dev-private-key"
+  name = "web-server-stg-private-key"
 }
 
 resource "aws_secretsmanager_secret_version" "web_server_key" {
@@ -29,6 +29,6 @@ resource "aws_instance" "web_server" {
   vpc_security_group_ids      = [aws_security_group.web_sg.id]
 
   tags = {
-    Name = "web-server-dev"
+    Name = "web-server-stg"
   }
 }
