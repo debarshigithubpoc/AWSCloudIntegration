@@ -26,4 +26,9 @@ data "aws_nat_gateway" "gateway" {
     name   = "tag:Name"
     values = [each.value.gateway_name]
   }
+
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
 }

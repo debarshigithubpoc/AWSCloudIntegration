@@ -4,10 +4,11 @@ resource "aws_vpc" "vpc" {
   tags             = merge(try(var.vpc.tags, {}), { DeployedBy = "Debarshi From IAC team" })
 }
 
-resource "aws_subnet" "subnet" { 
-    for_each            = var.vpc_subnet 
-    vpc_id              = aws_vpc.vpc.id 
-    cidr_block          = each.value.cidr 
-    availability_zone   = each.value.az 
-    tags                = merge(try(each.value.tags, {}), { DeployedBy = "Debarshi From IAC team" })
+resource "aws_subnet" "subnet" {
+  for_each                = var.vpc_subnet
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = each.value.cidr
+  availability_zone       = each.value.az
+  map_public_ip_on_launch = try(each.value.map_public_ip_on_launch, false)
+  tags                    = merge(try(each.value.tags, {}), { DeployedBy = "Debarshi From IAC team" })
 }

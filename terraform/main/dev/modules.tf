@@ -30,6 +30,12 @@ module "route_tables" {
   depends_on = [module.vpcs, module.nat_gateways]
 }
 
+module "route_associations" {
+  source             = "../../modules/route_table_association"
+  route_associations = try(var.route_associations, {})
+  depends_on         = [module.route_tables]
+}
+
 module "iam_role" {
   source                         = "../../modules/iam_role"
   for_each                       = try(var.iam_roles, {})
@@ -53,5 +59,5 @@ module "ecr_registry" {
 module "eks_cluster" {
   source       = "../../modules/eks_cluster"
   eks_clusters = try(var.eks_clusters, {})
-  depends_on = [module.ecr_registry,module.route_tables]
 }
+

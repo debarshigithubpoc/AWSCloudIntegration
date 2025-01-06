@@ -3,7 +3,7 @@ resource "aws_eks_cluster" "eks_cluster" {
   for_each = var.eks_clusters
   name     = each.value.name
   role_arn = data.aws_iam_role.eks_cluster_role[each.key].arn
-  version  = try(each.value.name, "1.27")
+  version  = try(each.value.version, "1.27")
 
   vpc_config {
     subnet_ids              = local.subnet_ids_by_eks[each.key]

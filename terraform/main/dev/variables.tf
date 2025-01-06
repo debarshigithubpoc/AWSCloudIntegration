@@ -41,3 +41,7 @@ variable "nacls" {
 variable "eks_clusters" {
   default = {}
 }
+
+variable "route_associations" {
+  default = {}
+}

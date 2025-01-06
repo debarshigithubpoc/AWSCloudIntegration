@@ -16,8 +16,9 @@ vpcs = {
 
       ## EKS Jump Box Subnet
       web_pub_subnet_1a = {
-        cidr = "10.0.1.0/24"
-        az   = "ap-south-1a"
+        cidr                    = "10.0.1.0/24"
+        az                      = "ap-south-1a"
+        map_public_ip_on_launch = true
         tags = {
           Name = "eks-dev-vpc-001-web-pub-subnet-001"
         }
@@ -43,8 +44,9 @@ vpcs = {
 
       ## EKS Jump Box Subnet
       web_pub_subnet_1b = {
-        cidr = "10.0.4.0/24"
-        az   = "ap-south-1b"
+        cidr                    = "10.0.4.0/24"
+        az                      = "ap-south-1b"
+        map_public_ip_on_launch = true
         tags = {
           Name = "eks-dev-vpc-001-web-pub-subnet-002"
         }
@@ -190,6 +192,48 @@ route_tables = {
     }
   }
 }
+
+## Route Associations
+
+route_associations = {
+
+  rt1 = {
+    vpc_name         = "eks-dev-vpc-001"
+    subnet_name      = "eks-dev-vpc-001-web-pub-subnet-001"
+    route_table_name = "eks-dev-vpc001-pubtrt-001"
+  }
+
+  rt2 = {
+    vpc_name         = "eks-dev-vpc-001"
+    subnet_name      = "eks-dev-vpc-001-db-prv-subnet-002"
+    route_table_name = "eks-dev-vpc001-prvtrt-001"
+  }
+
+  rt3 = {
+    vpc_name         = "eks-dev-vpc-001"
+    subnet_name      = "eks-dev-vpc-001-app-prv-subnet-001"
+    route_table_name = "eks-dev-vpc001-prvtrt-002"
+  }
+
+  rt4 = {
+    vpc_name         = "eks-dev-vpc-001"
+    subnet_name      = "eks-dev-vpc-001-web-pub-subnet-002"
+    route_table_name = "eks-dev-vpc001-pubtrt-001"
+  }
+
+  rt5 = {
+    vpc_name         = "eks-dev-vpc-001"
+    subnet_name      = "eks-dev-vpc-001-db-prv-subnet-004"
+    route_table_name = "eks-dev-vpc001-prvtrt-003"
+  }
+
+  rt6 = {
+    vpc_name         = "eks-dev-vpc-001"
+    subnet_name      = "eks-dev-vpc-001-app-prv-subnet-003"
+    route_table_name = "eks-dev-vpc001-prvtrt-004"
+  }
+}
+
 
 ## Iam Roles for EKS 
 
