@@ -59,5 +59,10 @@ module "ecr_registry" {
 module "eks_cluster" {
   source       = "../../modules/eks_cluster"
   eks_clusters = try(var.eks_clusters, {})
+  depends_on   = [module.ecr_registry, module.route_associations]
 }
 
+module "jumbox_instance" {
+  source     = "./JumpboxConfigurationAKS"
+  depends_on = [module.route_associations]
+}
